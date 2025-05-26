@@ -34,7 +34,6 @@
         <div id="userDropdown" class="user-dropdown">
           <a href="#" onclick="showHistory('boletos')">Historial de boletos</a>
           <a href="#" onclick="showHistory('alimentos')">Historial de alimentos</a>
-
           <a href="#" onclick="logout()">Cerrar sesión</a>
         </div>
       </div>
@@ -133,30 +132,32 @@
       <h3 id="formTitle">Registro</h3>
       <div class="form-columns"> 
         <div class="column">
-      <input type="text" placeholder="Nombre(s)" required />
-      <input type="text" placeholder="Primer apellido" required />
-      <input type="text" placeholder="Segundo apellido" required />
-      <input type="email" placeholder="Correo" required />
-      
+          <form action="#" method="POST">
+      <input type="text" placeholder="Nombre(s)" name = "name" required />
+      <input type="text" placeholder="Primer apellido" name = "lastName" required />
+      <input type="text" placeholder="Segundo apellido" name = "secondLastName" required />
+      <input type="email" placeholder="Correo" name = "email" required />
+
            </div>
     <div class="column">
-            <input type="password" placeholder="Contraseña" required />
-      <input type="tel" placeholder="Teléfono" pattern="[0-9]{10}" title="Ingresa un número de 10 dígitos" required />
-  
-     
+            <input type="password" placeholder="Contraseña" name = "password" required />
+      <input type="tel" placeholder="Teléfono" pattern="[0-9]{10}" title="Ingresa un número de 10 dígitos" name = "phone" required />
+
+
       <label for="membershipType" style="color:white; font-size:14px;">Tipo de membresía:</label>
-      <select id="membershipType" required>
+      <select id="membershipType" name = "membershipType" required>
         <option value="" disabled selected>Selecciona una opción</option>
         <option value="basica">Normal</option>
         <option value="premium">Platino</option>
         <option value="vip">Diamante</option>
       </select>
       <label for="paymentMethod" style="color:white; font-size:14px; margin-bottom: 10px; display: inline-block;">Método de pago (tarjeta):</label>
-<input type="text" id="paymentMethod" placeholder="Número de tarjeta" pattern="[0-9]{16}" title="Número de tarjeta de 16 dígitos" required style="margin-top: 4px;" />
+<input type="text" id="paymentMethod" placeholder="Número de tarjeta" pattern="[0-9]{16}" title="Número de tarjeta de 16 dígitos" required style="margin-top: 4px;" name="paymentMethod" />
 
        </div>
   </div>
       <button type="submit">Registrarse</button>
+      </form>
       <small onclick="toggleAuthMode()">
         ¿Ya tienes una cuenta? <Strong>Inicia sesión</Strong>
       </small>
@@ -164,8 +165,8 @@
       } else {
         authForm.innerHTML = `
       <h3 id="formTitle">Iniciar Sesión</h3>
-      <input type="email" placeholder="Correo" required />
-      <input type="password" placeholder="Contraseña" required />
+      <input type="email" placeholder="Correo" required name="email"/>
+      <input type="password" placeholder="Contraseña" required name="password"/>
       <button type="submit">Entrar</button>
       <small onclick="toggleAuthMode()">
         ¿No tienes cuenta? <Strong>Regístrate</Strong>
