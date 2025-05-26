@@ -1,0 +1,101 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+.container{
+    height: 80vh;
+    width: 100%;
+    margin-top: 6%;
+    /* background-color: blueviolet; */
+}
+
+.img-container {
+    position: relative;
+    width: 50%;
+    height: 550px;
+    /* padding-top: 75%; 4:3 Aspect Ratio */
+    /* background-color: aqua; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.funcion{
+    border-radius: 16px;
+    /* border: 1px solid black; */
+    box-shadow: 5px 5px 10px gray;
+    min-height: 80vh;
+    height: max-content;
+}
+
+.movieImage{
+    width: 75%;
+    margin-top: 8%;   
+    border-radius: 16px; 
+}
+
+.context {
+    /* background-color: violet; */
+
+    .title-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 4%;
+        /* background-color: aqua; */
+    }
+}
+
+.title {
+    text-align: center;
+}
+
+.drop-sinopsis {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+
+.card-body {
+    background-color: #17202a !important;
+    color: white !important;
+}
+
+.horarios {
+    display: flex;
+    flex-direction: row;
+}
+
+.hora {
+    width: 10%;
+    padding:1.5%;
+    background-color: #17202a;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 16px;
+    margin: 2% 1% 2% 1%;
+}
+
+.hora:hover {
+    background-color: #f5f5f5;
+    border: solid 1px #17202a;
+    color: #17202a;
+    transition: 0.3s;
+}
+
+.salas {
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+.footer {
+    background-color: #17202a;
+    
+    .text-muted {
+        color: #f5f5f5; 
+    }
+}

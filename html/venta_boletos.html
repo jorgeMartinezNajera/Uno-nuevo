@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Venta de boletos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/boletos.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<!-- Modal de advertencia -->
+<div class="modal fade " id="limitModal" tabindex="-1" aria-labelledby="limitModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-dark">
+                  <div class="modal-header">
+                        <h5 class="modal-title" id="limitModalLabel">Límite alcanzado</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                      </div>
+                  <div class="modal-body">
+                        Solo puedes seleccionar hasta 3 asientos. Deselecciona uno para elegir otro.
+                      </div>
+                  <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Entendido</button>
+                      </div>
+                </div>
+          </div>
+</div>
+
+<!-- Modal de resumen -->
+<div class="modal fade" id="summaryModal" tabindex="-1" aria-labelledby="summaryModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-dark">
+                  <div class="modal-header">
+                        <h5 class="modal-title" id="summaryModalLabel">Resumen de tu compra</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                      </div>
+                  <div class="modal-body">
+                        <p><strong>Asientos seleccionados:</strong> <span id="modal-seats"></span></p>
+                        <p><strong>Precio por asiento:</strong> $<span id="modal-price"></span></p>
+                        <p><strong>Total a pagar:</strong> $<span id="modal-total"></span></p>
+                      </div>
+                  <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-success">Confirmar</button>
+                      </div>
+                </div>
+          </div>
+</div>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Cinema</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasDarkNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" id="offcanvasDarkNavbar">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title">¿Qué estás buscando?</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Iniciar Sesión</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Ver nuestros horarios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Alimentos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="container mt-5 pt-5 text-center">
+        <h2>Selecciona tus asientos</h2>
+
+        <div class="cs-screen">Pantalla</div>
+
+        <div class="cs-seat-map">
+
+            <div class="cs-seat-row">
+                    <span class="cs-row-label">A</span>
+                    <button class="cs-seat" data-seat="A1"></button>
+                    <button class="cs-seat" data-seat="A2"></button>
+                    <button class="cs-seat" data-seat="A3"></button>
+                    <button class="cs-seat cs-occupied" data-seat="A4"></button>
+                    <button class="cs-seat" data-seat="A5"></button>
+                    <button class="cs-seat" data-seat="A6"></button>
+            </div>
+            <div class="cs-seat-row cs-seat-numbers">
+                    <span class="cs-row-label"></span>
+                    <span class="cs-seat-number">A1</span>
+                    <span class="cs-seat-number">A2</span>
+                    <span class="cs-seat-number">A3</span>
+                    <span class="cs-seat-number">A4</span>
+                    <span class="cs-seat-number">A5</span>
+                    <span class="cs-seat-number">A6</span>
+            </div>
+
+            <div class="cs-seat-row">
+                    <span class="cs-row-label">B</span>
+                    <button class="cs-seat" data-seat="B1"></button>
+                    <button class="cs-seat" data-seat="B2"></button>
+                    <button class="cs-seat" data-seat="B3"></button>
+                    <button class="cs-seat cs-occupied" data-seat="B4"></button>
+                    <button class="cs-seat" data-seat="B5"></button>
+                    <button class="cs-seat" data-seat="B6"></button>
+            </div>
+            <div class="cs-seat-row cs-seat-numbers">
+                    <span class="cs-row-label"></span>
+                    <span class="cs-seat-number">B1</span>
+                    <span class="cs-seat-number">B2</span>
+                    <span class="cs-seat-number">B3</span>
+                    <span class="cs-seat-number">B4</span>
+                    <span class="cs-seat-number">B5</span>
+                    <span class="cs-seat-number">B6</span>
+            </div>
+            <div class="cs-seat-row">
+                    <span class="cs-row-label">C</span>
+                    <button class="cs-seat" data-seat="C1"></button>
+                    <button class="cs-seat" data-seat="C2"></button>
+                    <button class="cs-seat" data-seat="C3"></button>
+                    <button class="cs-seat cs-occupied" data-seat="C4"></button>
+                    <button class="cs-seat" data-seat="C5"></button>
+                    <button class="cs-seat" data-seat="C6"></button>
+            </div>
+            <div class="cs-seat-row cs-seat-numbers">
+                    <span class="cs-row-label"></span>
+                    <span class="cs-seat-number">C1</span>
+                    <span class="cs-seat-number">C2</span>
+                    <span class="cs-seat-number">C3</span>
+                    <span class="cs-seat-number">C4</span>
+                    <span class="cs-seat-number">C5</span>
+                    <span class="cs-seat-number">C6</span>
+            </div>
+        </div>
+
+        <!-- Resumen -->
+        <div class="cs-summary">
+            <p>Total de asientos seleccionados: <span id="selected-seats">0</span></p>
+            <p>Asientos seleccionados: <span id="selected-seat-list">Ninguno</span></p>
+            <button id="confirm-button" class="btn btn-primary">Confirmar compra</button>
+
+            <div id="detailed-summary" class="mt-4 text-start" style="display: none;">
+                    <h5>Resumen de tu compra:</h5>
+                    <ul>
+                            <li><strong>Asientos seleccionados:</strong> <span id="summary-seats"></span></li>
+                            <li><strong>Precio por asiento:</strong> $<span id="summary-price"></span></li>
+                            <li><strong>Total a pagar:</strong> $<span id="summary-total"></span></li>
+                        </ul>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script/boletos.js"></script>
+</body>
+
+</html>
