@@ -57,17 +57,17 @@
   <div class="custom-carousel" id="customCarousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <a href="funcion.html"><img src="../img/destinoFinalHorizontal.jpg" alt="Póster 1"></a>
+        <a href="../php/funcion.php?pelicula_buscar=12457"><img src="../img/destinoFinalHorizontal.jpg" alt="Póster 1"></a>
       </div>
       <div class="carousel-item">
-        <a href="funcion.html"><img src="../img/minecraftHorizontal.jpg" alt="Póster 2"></a>
+        <a href="../php/funcion.php?pelicula_buscar=75314"><img src="../img/minecraftHorizontal.jpg" alt="Póster 2"></a>
       </div>
       <div class="carousel-item">
-        <a href="funcion.html"><img src="../img/dragonHorizontal.jpg" alt="Póster 3">
+        <a href="../php/funcion.php?pelicula_buscar=25467"><img src="../img/dragonHorizontal.jpg" alt="Póster 3">
         </a>
       </div>
       <div class="carousel-item">
-        <a href="funcion.html"><img src="../img/screamHorizontal.jpg" alt="Póster 4"></a>
+        <a href="../php/funcion.php?pelicula_buscar=68795"><img src="../img/screamHorizontal.jpg" alt="Póster 4"></a>
       </div>
     </div>
     <button class="carousel-control prev" onclick="prevSlide()">❮</button>
@@ -78,12 +78,12 @@
     <div class="category-carousel">
       <h2>Terror</h2>
       <div class="carousel">
-        <a href="funcion.html?id=12457">
+        <a href="../php/funcion.php?pelicula_buscar=12457">
           <div class="poster" style="background-image: url('../img/destinoFinalVertical.jpg')">
           </div>
           <div class="poster-title">Destino Final: Legado de Sangre</div>
         </a>
-        <a href="funcion.html?id=68795">
+        <a href="../php/funcion.php?pelicula_buscar=68795">
           <div class="poster" style="background-image: url('../img/screamVertical.jpg')">
           </div>
           <div class="poster-title">Scream VI</div>
@@ -94,11 +94,11 @@
     <div class="category-carousel">
       <h2>Aventura</h2>
       <div class="carousel">
-        <a href="funcion.html?id=75314">
+        <a href="../php/funcion.php?pelicula_buscar=75314">
           <div class="poster" style="background-image: url('../img/minecraftVertical.jpg')"></div>
           <div class="poster-title">Minecraft: La Película</div>
         </a>
-        <a href="funcion.html?id=25467">
+        <a href="../php/funcion.php?pelicula_buscar=25467">
           <div class="poster" style="background-image: url('../img/dragonVertical.jpg')">
           </div>
           <div class="poster-title">Cómo Entrenar a tu Dragón</div>
@@ -132,7 +132,7 @@
       <h3 id="formTitle">Registro</h3>
       <div class="form-columns"> 
         <div class="column">
-          <form action="#" method="POST">
+          <form action="../php/create.php" method="POST">
       <input type="text" placeholder="Nombre(s)" name = "name" required />
       <input type="text" placeholder="Primer apellido" name = "lastName" required />
       <input type="text" placeholder="Segundo apellido" name = "secondLastName" required />

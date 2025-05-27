@@ -17,19 +17,19 @@ if (!$conn) {
     $lastName = $_POST['lastName'];
     $secondLastName = $_POST['secondLastName'];
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    // $password = $_POST['password'];
     $phone = $_POST['phone'];
     $paymentMethod = $_POST['paymentMethod'];
     $membershipType = $_POST['membershipType'];
 
-    $sql = 'INSERT INTO CLIENTE (NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO, TELEFONO, METODO_PAGO, ID_MEMBRESIA) VALUES ( :name, :lastName, :secondLastName, :email, :phone, :paymentMethod, :membershipType)';
+    $sql = 'INSERT INTO CLIENTE (ID_CLIENTE,NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO, TELEFONO, METODO_PAGO, ID_MEMBRESIA) VALUES ( 25431,name, :lastName, :secondLastName, :email, :phone, :paymentMethod, :membershipType)';
     $stid = oci_parse($conn, $sql);
 
     oci_bind_by_name($stid, ':name', $name);
     oci_bind_by_name($stid, ':lastName', $lastName);
     oci_bind_by_name($stid, ':secondLastName', $secondLastName);
     oci_bind_by_name($stid, ':email', $email);
-    oci_bind_by_name($stid, ':password', $password);
+    // oci_bind_by_name($stid, ':password', $password);
     oci_bind_by_name($stid, ':phone', $phone);
     oci_bind_by_name($stid, ':paymentMethod', $paymentMethod);
     oci_bind_by_name($stid, ':membershipType', $membershipType);
