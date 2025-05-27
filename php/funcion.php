@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['pelicula_buscar']) && !e
                 $pelicula_imagen_html .= 
                 "
                 <div class='col-5 img-container'>
-                    <img class='movieImage' src='mostrar_blob.php?id=" . urlencode($row['ID_PELICULA']) . "&tipo=imagen' alt=''>
+                    <img class='movieImage' src='mostrar_blob.php?id=" . urlencode($row['ID_PELICULA']) . "&tipo=POSTER' alt=''>
                 </div>
                 ";
                 //Sección de descripción
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['pelicula_buscar']) && !e
                                     . htmlentities($row['RESUMEN']) .
                                     "<div class='trailer-container'>
                                     <video class='trailer' controls>
-                                        <source src='mostrar_blob.php?id=" . urlencode($row['ID_PELICULA']) . "&tipo=trailer' type='video/mp4'>
+                                        <source src='mostrar_blob.php?id=" . urlencode($row['ID_PELICULA']) . "&tipo=TRAILER' type='video/mp4'>
                                         Tu navegador no soporta el elemento de video.
                                     </video>
                                 </div>
