@@ -180,10 +180,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['pelicula_buscar']) && !e
                 <?php endif; ?>
 
                 <?php if (!empty($pelicula_info_html)): ?>
-                    <div>
                         <?php echo $pelicula_imagen_html; ?>
                         <?php echo $pelicula_info_html; ?>
-                    </div>
                 <?php endif; ?>
             <?php endif; ?>
         </div>

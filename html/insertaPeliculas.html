@@ -73,7 +73,7 @@
 
 <div class="container">
     <h2>Registrar Nueva Película</h2>
-    <form action="procesar_insertar_pelicula.php" method="POST" enctype="multipart/form-data">
+    <form action="../php/insertMovies.php" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="id_pelicula">ID Película:</label>
             <input type="number" id="id_pelicula" name="id_pelicula" required max="99999">
@@ -123,6 +123,7 @@
         <div class="form-group">
             <label for="trailer">Tráiler de la Película (Video):</label>
             <input type="file" id="trailer" name="trailer" accept="video/*">
+            <p></p>
             <small>(Opcional si no todas las películas tienen tráiler)</small>
         </div>
 
