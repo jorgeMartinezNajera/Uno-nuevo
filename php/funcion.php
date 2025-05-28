@@ -90,10 +90,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['pelicula_buscar']) && !e
                                            {$hora}
                                          </a>"; */
                                          $pelicula_info_html .= "
-    <a href='venta_boletos.php?id={$pelicula_buscar}&sala={$num_sala}&hora={$hora}' 
-       class='btn btn-outline-primary btn-sm m-1'>
-       {$hora}
-    </a>";
+    <a href='venta_boletos.php?id={$pelicula_buscar}&nombre=" . urlencode($row['NOMBRE']) . "&sala={$num_sala}&hora={$hora}' 
+   class='btn btn-outline-primary btn-sm m-1'>
+   {$hora}
+</a>
+";
                                 }
                                 $pelicula_info_html .= "</div>";
                             }
