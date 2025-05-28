@@ -206,7 +206,7 @@
     <div class="category-carousel">
       <h2>Terror</h2>
       <div class="carousel">
-        <a href="funcion.php?pelicula_buscar=12457">
+        <a href="funcion.php?pelicula_buscar=1">
           <div class="poster" style="background-image: url('../img/destinoFinalVertical.jpg')">
           </div>
           <div class="poster-title">Destino Final: Legado de Sangre</div>
