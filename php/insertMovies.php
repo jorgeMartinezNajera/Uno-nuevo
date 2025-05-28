@@ -131,7 +131,7 @@ if (!$conn) {
 // Mostrar el mensaje (puedes integrarlo mejor en tu HTML)
 if (!empty($mensaje)) {
     echo "<p>" . htmlspecialchars($mensaje) . "</p>";
-    echo "<p><a href='tu_formulario.html'>Volver al formulario</a></p>"; // Cambia 'tu_formulario.html' por el nombre de tu archivo de formulario
+    echo "<p><a href='insertMovies.html'>Volver al formulario</a></p>"; // Cambia 'tu_formulario.html' por el nombre de tu archivo de formulario
 }
 
 ?>

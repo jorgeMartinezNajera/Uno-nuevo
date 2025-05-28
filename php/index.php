@@ -185,7 +185,7 @@
       while ($row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
         $activeClass = $first ? 'active' : '';
         echo '<div class="carousel-item ' . $activeClass . '">';
-        echo '<a href="funcion.html"><img src="../php/mostrar_blob.php?id=' . $row['ID_PELICULA'] . '" alt="' . htmlspecialchars($row['NOMBRE']) . '"></a>';
+        echo '<a href="funcion.php?pelicula_buscar=' . $row['ID_PELICULA'] . '"><img src="../php/mostrar_blob.php?id=' . $row['ID_PELICULA'] . '" alt="' . htmlspecialchars($row['NOMBRE']) . '"></a>';
         echo '</div>';
         $first = false;
       }
@@ -206,12 +206,12 @@
     <div class="category-carousel">
       <h2>Terror</h2>
       <div class="carousel">
-        <a href="funcion.html?id=12457">
+        <a href="funcion.php?pelicula_buscar=12457">
           <div class="poster" style="background-image: url('../img/destinoFinalVertical.jpg')">
           </div>
           <div class="poster-title">Destino Final: Legado de Sangre</div>
         </a>
-        <a href="funcion.html?id=68795">
+        <a href="funcion.php?pelicula_buscar=68795">
           <div class="poster" style="background-image: url('../img/screamVertical.jpg')">
           </div>
           <div class="poster-title">Scream VI</div>
@@ -222,11 +222,11 @@
     <div class="category-carousel">
       <h2>Aventura</h2>
       <div class="carousel">
-        <a href="funcion.html?id=75314">
+        <a href="funcion.php?pelicula_buscar=75314">
           <div class="poster" style="background-image: url('../img/minecraftVertical.jpg')"></div>
           <div class="poster-title">Minecraft: La Película</div>
         </a>
-        <a href="funcion.html?id=25467">
+        <a href="funcion.php?pelicula_buscar=25467">
           <div class="poster" style="background-image: url('../img/dragonVertical.jpg')">
           </div>
           <div class="poster-title">Cómo Entrenar a tu Dragón</div>
