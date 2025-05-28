@@ -33,7 +33,7 @@ if (!empty($_POST['emailL']) && !empty($_POST['passwordL'])) {
             'apellido' => $row['APELLIDO_PATERNO'],
             'correo' => $row['CORREO']
         ]);
-        header("Location: ../html/index.php?$params");
+        header("Location: index.php?$params");
     } else {
         // Login fallido
         $params = http_build_query(['login' => 'fallido']);
