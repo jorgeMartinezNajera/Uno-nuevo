@@ -81,7 +81,7 @@ elseif ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['telefono_buscar']) &
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 450px;
+            max-width: 550px;
             width: 100%; /* Para asegurar que ocupe el max-width */
             margin-bottom: 20px; /* Espacio entre contenedores */
         }
