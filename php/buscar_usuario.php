@@ -185,6 +185,9 @@ elseif ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['telefono_buscar']) &
                 <li class="nav-item">
                     <a class="nav-link" href="../html/consultarUsuario.html">Consultar Clientes</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/insertaPeliculas.html">Insertar Peliculas</a>
+                </li>
                 <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Dropdown
