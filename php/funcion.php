@@ -136,16 +136,19 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['pelicula_buscar']) && !e
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                    <a class="nav-link active" aria-current="page" href="index.php">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Iniciar Sesión</a>
+                    <a class="nav-link" href="index.php">Iniciar Sesión</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Ver nuestros horarios</a>
+                    <a class="nav-link" href="index.php">Ver nuestros horarios</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Alimentos</a>
+                    <a class="nav-link" href="../html/consultarPelicula.html">Consultar Peliculas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/consultarUsuario.html">Consultar Clientes</a>
                 </li>
                 <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
