@@ -37,7 +37,7 @@ if (!empty($_POST['emailL']) && !empty($_POST['passwordL'])) {
     } else {
         // Login fallido
         $params = http_build_query(['login' => 'fallido']);
-        header("Location: ../html/index.php?$params");
+        header("Location: index.php?$params");
     }
 
     oci_free_statement($stid);
@@ -96,7 +96,7 @@ if ($result) {
         'apellido' => $lastName,
         'correo' => $email
     ]);
-    header("Location: ../html/index.php?$params");
+    header("Location: index.php?$params");
 } else {
     $e = oci_error($stid);
     echo "Error al crear el cliente: " . $e['message'];

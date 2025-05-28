@@ -76,7 +76,7 @@
 
 
   function verificarSesion() {
-    fetch('../php/session_status.php')
+    fetch('session_status.php')
       .then(res => res.json())
       .then(data => {
         if (data.loggedIn) {
@@ -86,7 +86,7 @@
             <div class="user-icon">👤</div>
             <div class="dropdown-menu" id="dropdownMenu">
               <a href="historial.html">Historial</a>
-              <a href="../php/cerrar_sesion.php">Cerrar sesión</a>
+              <a href="cerrar_sesion.php">Cerrar sesión</a>
             </div>
           `;
           loginLink.classList.add('logged-in');
@@ -122,7 +122,7 @@
   </header>
 
   <div class="auth-panel" id="authPanel">
-    <form class="auth-form" id="authForm" action="../php/create.php" method="POST">
+    <form class="auth-form" id="authForm" action="create.php" method="POST">
       <h3 id="formTitle">Registro</h3>
 
       <!-- Campos de registro -->
@@ -162,7 +162,7 @@
     </form>
   </div>
   <?php
-  include("../php/conection.php");
+  include("conection.php");
 
   $query = 'SELECT ID_PELICULA, NOMBRE FROM PELICULA';
 
@@ -185,7 +185,7 @@
       while ($row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
         $activeClass = $first ? 'active' : '';
         echo '<div class="carousel-item ' . $activeClass . '">';
-        echo '<a href="funcion.php?pelicula_buscar=' . $row['ID_PELICULA'] . '"><img src="../php/mostrar_blob.php?id=' . $row['ID_PELICULA'] . '" alt="' . htmlspecialchars($row['NOMBRE']) . '"></a>';
+        echo '<a href="funcion.php?pelicula_buscar=' . $row['ID_PELICULA'] . '"><img src=".mostrar_blob.php?id=' . $row['ID_PELICULA'] . '" alt="' . htmlspecialchars($row['NOMBRE']) . '"></a>';
         echo '</div>';
         $first = false;
       }
