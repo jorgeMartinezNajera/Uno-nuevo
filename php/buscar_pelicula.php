@@ -32,12 +32,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id']) && !empty(trim($_G
                 $pelicula .= '<h1 class="title"> Información de la Película 🎬</h1>';
                 $pelicula .= '<img class="movieImage" src="mostrar_blob.php?id=' . urlencode($row['ID_PELICULA']) . '&tipo=POSTER" alt="">';
                 $pelicula .= '<ul>';
-                $pelicula .= '<li class = "res"><strong>ID:</strong>' . htmlentities($row['ID_PELICULA']) . '</li>';
-                $pelicula .= '<li class = "res"><strong>Título:</strong>' . htmlentities($row['NOMBRE']) . '</li>';
-                $pelicula .= '<li class = "res"><strong>Resumen:</strong>' . htmlentities($row['RESUMEN']) . '</li>';
-                $pelicula .= '<li class = "res"><strong>Clasificación:</strong>' . htmlentities($row['CLASIFICACION']) . '</li>';
-                $pelicula .= '<li class = "res"><strong>Duración:</strong>' . htmlentities($row['DURACION']) . '</li>';
-                $pelicula .= '<li class = "res"><strong>Género:</strong>' . htmlentities($row['GENERO']) . '</li>';
+                $pelicula .= '<li class = "res"><strong>ID: </strong>' . htmlentities($row['ID_PELICULA']) . '</li>';
+                $pelicula .= '<li class = "res"><strong>Título: </strong>' . htmlentities($row['NOMBRE']) . '</li>';
+                $pelicula .= '<li class = "res"><strong>Resumen: </strong>' . htmlentities($row['RESUMEN']) . '</li>';
+                $pelicula .= '<li class = "res"><strong>Clasificación: </strong>' . htmlentities($row['CLASIFICACION']) . '</li>';
+                $pelicula .= '<li class = "res"><strong>Duración: </strong>' . htmlentities($row['DURACION']) . '</li>';
+                $pelicula .= '<li class = "res"><strong>Género: </strong>' . htmlentities($row['GENERO']) . '</li>';
                 $pelicula .= '</ul>';
                 $pelicula .= '<video class="trailer" controls>
                                 <source src="mostrar_blob.php?id=' . urlencode($row['ID_PELICULA']) . '&tipo=TRAILER" type="video/mp4">
@@ -173,7 +173,7 @@ elseif ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['telefono_buscar']) &
   <!-- Navbar -->
     <nav class="navbar navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Cinema</a>
+            <a class="navbar-brand" href="./index.php">Cinema</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -198,6 +198,9 @@ elseif ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['telefono_buscar']) &
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../html/consultarUsuario.html">Consultar Clientes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/insertaPeliculas.html">Insertar Peliculas</a>
                 </li>
                 <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

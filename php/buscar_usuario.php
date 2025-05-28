@@ -159,7 +159,7 @@ elseif ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['telefono_buscar']) &
         <!-- Navbar -->
     <nav class="navbar navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Cinema</a>
+            <a class="navbar-brand" href="./index.php">Cinema</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -184,6 +184,9 @@ elseif ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['telefono_buscar']) &
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../html/consultarUsuario.html">Consultar Clientes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/insertaPeliculas.html">Insertar Peliculas</a>
                 </li>
                 <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
