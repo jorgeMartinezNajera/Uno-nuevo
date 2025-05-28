@@ -222,7 +222,7 @@
     <div class="category-carousel">
       <h2>Aventura</h2>
       <div class="carousel">
-        <a href="funcion.php?pelicula_buscar=75314">
+        <a href="funcion.php?pelicula_buscar=2">
           <div class="poster" style="background-image: url('../img/minecraftVertical.jpg')"></div>
           <div class="poster-title">Minecraft: La Película</div>
         </a>
