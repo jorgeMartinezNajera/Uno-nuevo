@@ -7,127 +7,132 @@ $pelicula_info_html = "";
 $pelicula_imagen_html = "";
 $mensaje_error = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['pelicula_buscar']) && !empty(trim($_GET['pelicula_buscar']))) {
-    $pelicula_buscar = trim($_GET['pelicula_buscar']);
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    if (isset($_GET['pelicula_buscar']) && !empty(trim($_GET['pelicula_buscar']))) {
+        $pelicula_buscar = trim($_GET['pelicula_buscar']);
+        $conn = oci_connect($server_name, $server_pass, $server_conn_str);
 
-    $conn = oci_connect($server_name, $server_pass, $server_conn_str);
+        if (!$conn) {
+            $e = oci_error();
+            $mensaje_error = "Error de conexión: " . htmlentities($e['message']);
+        } else {
+            $sql = "SELECT * FROM PELICULA WHERE ID_PELICULA = :pelicula_buscar";
+            $stid = oci_parse($conn, $sql);
+            oci_bind_by_name($stid, ':pelicula_buscar', $pelicula_buscar);
 
-    if (!$conn) {
-        $e = oci_error();
-        $mensaje_error = "Error de conexión: " . htmlentities($e['message']);
-    } else {
-        $sql = "SELECT * FROM PELICULA WHERE ID_PELICULA = :pelicula_buscar";
-        $stid = oci_parse($conn, $sql);
-        oci_bind_by_name($stid, ':pelicula_buscar', $pelicula_buscar);
+            if (oci_execute($stid)) {
+                if ($row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
+                    // Imagen de la película
+                    $pelicula_imagen_html .= "
+                        <div class='col-5 img-container'>
+                            <img class='movieImage' src='mostrar_blob.php?id=" . urlencode($row['ID_PELICULA']) . "&tipo=POSTER' alt=''>
+                        </div>";
 
-        if (oci_execute($stid)) {
-            if ($row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
-                $pelicula_imagen_html .= "
-                <div class='col-5 img-container'>
-                    <img class='movieImage' src='mostrar_blob.php?id=" . urlencode($row['ID_PELICULA']) . "&tipo=POSTER' alt=''>
-                </div>";
-
-                $pelicula_info_html .= "
-                <div class='col-7 context'>
-                    <div class='title-container'>
-                        <h1 class='title'>" . htmlentities($row['NOMBRE']) . "</h1>
-                    </div>
-                    <div class='sinopsis'>
-                        <p class='d-inline-flex gap-1'>
-                            <a class='drop-sinopsis' data-bs-toggle='collapse' href='#collapseExample' role='button' aria-expanded='false' aria-controls='collapseExample'>
-                            Sinopsis 📕
-                            </a>
-                        </p>
-                        <div class='collapse' id='collapseExample'>
-                            <div class='card card-body'>" . htmlentities($row['RESUMEN']) . "
-                                <div class='trailer-container'>
-                                    <video class='trailer' controls>
-                                        <source src='mostrar_blob.php?id=" . urlencode($row['ID_PELICULA']) . "&tipo=TRAILER' type='video/mp4'>
-                                        Tu navegador no soporta el elemento de video.
-                                    </video>
-                                </div>
+                    // Información de la película
+                    $pelicula_info_html .= "
+                        <div class='col-7 context'>
+                            <div class='title-container'>
+                                <h1 class='title'>" . htmlentities($row['NOMBRE']) . "</h1>
                             </div>
-                        </div>
-                    </div>";
+                            <div class='sinopsis'>
+                                <p class='d-inline-flex gap-1'>
+                                    <a class='drop-sinopsis' data-bs-toggle='collapse' href='#collapseExample' role='button' aria-expanded='false' aria-controls='collapseExample'>
+                                        Sinopsis 📕
+                                    </a>
+                                </p>
+                                <div class='collapse' id='collapseExample'>
+                                    <div class='card card-body'>" . htmlentities($row['RESUMEN']) . "
+                                        <div class='trailer-container'>
+                                            <video class='trailer' controls>
+                                                <source src='mostrar_blob.php?id=" . urlencode($row['ID_PELICULA']) . "&tipo=TRAILER' type='video/mp4'>
+                                                Tu navegador no soporta el elemento de video.
+                                            </video>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>";
 
-                // Consulta de funciones
-                $sql_funciones = "
-                    SELECT F.HORA, F.ID_SALA, S.TIPO
-                    FROM FUNCION F
-                    JOIN SALA S ON F.ID_SALA = S.ID_SALA
-                    WHERE F.ID_PELICULA = :pelicula_buscar
-                    ORDER BY S.TIPO, F.ID_SALA, F.HORA
-                ";
-                $stid_funciones = oci_parse($conn, $sql_funciones);
-                oci_bind_by_name($stid_funciones, ':pelicula_buscar', $pelicula_buscar);
+                    // Funciones de la película
+                    $sql_funciones = "
+                        SELECT F.ID_FUNCION, F.HORA, F.ID_SALA, S.TIPO
+                        FROM FUNCION F
+                        JOIN SALA S ON F.ID_SALA = S.ID_SALA
+                        WHERE F.ID_PELICULA = :pelicula_buscar
+                        ORDER BY S.TIPO, F.ID_SALA, F.HORA";
 
-                $funciones = [];
+                    $stid_funciones = oci_parse($conn, $sql_funciones);
+                    oci_bind_by_name($stid_funciones, ':pelicula_buscar', $pelicula_buscar);
 
-                if (oci_execute($stid_funciones)) {
-                    $rows = [];
-                    oci_fetch_all($stid_funciones, $rows, 0, -1, OCI_FETCHSTATEMENT_BY_ROW + OCI_ASSOC);
+                    if (oci_execute($stid_funciones)) {
+                        $rows = [];
+                        oci_fetch_all($stid_funciones, $rows, 0, -1, OCI_FETCHSTATEMENT_BY_ROW + OCI_ASSOC);
 
-                    foreach ($rows as $f) {
-                        $tipo = trim($f['TIPO']);
-                        $sala = $f['ID_SALA'];
-                        $hora = $f['HORA'];
-                        $funciones[$tipo][$sala][] = $hora;
-                    }
-
-                    $tipos_sala = ['NORMAL', 'VIP'];
-                    $pelicula_info_html .= "<div class='salas'>";
-                    foreach ($tipos_sala as $tipo) {
-                        $pelicula_info_html .= "<div class='sala{$tipo}'>";
-                        $pelicula_info_html .= "<h2>Sala " . ucfirst(strtolower($tipo)) . "</h2>";
-
-                        if (isset($funciones[$tipo]) && is_array($funciones[$tipo])) {
-                            foreach ($funciones[$tipo] as $num_sala => $horas) {
-                                $pelicula_info_html .= "<h5>Sala {$num_sala}</h5><div class='horarios'>";
-                                foreach ($horas as $hora) {
-                                    /* $pelicula_info_html .= "
-                                        <a href='venta_boletos.php?id={$pelicula_buscar}&sala={$num_sala}&hora={$hora}' 
-                                           class='btn horario-btn'>
-                                           {$hora}
-                                         </a>"; */
-                                         $pelicula_info_html .= "
-    <a href='venta_boletos.php?id={$pelicula_buscar}&nombre=" . urlencode($row['NOMBRE']) . "&sala={$num_sala}&hora={$hora}' 
-   class='btn btn-outline-primary btn-sm m-1'>
-   {$hora}
-</a>
-";
-                                }
-                                $pelicula_info_html .= "</div>";
-                            }
-                        } else {
-                            $pelicula_info_html .= "<p>No hay funciones programadas.</p>";
+                        $funciones = [];
+                        foreach ($rows as $f) {
+                            $tipo = trim($f['TIPO']);
+                            $sala = $f['ID_SALA'];
+                            $hora = $f['HORA'];
+                            $id_funcion = $f['ID_FUNCION'];
+                            $funciones[$tipo][$sala][] = [
+                                'hora' => $hora,
+                                'id_funcion' => $id_funcion
+                            ];
                         }
 
-                        $pelicula_info_html .= "</div>";
+                        $tipos_sala = ['NORMAL', 'VIP'];
+                        $pelicula_info_html .= "<div class='salas'>";
+                        foreach ($tipos_sala as $tipo) {
+                            $pelicula_info_html .= "<div class='sala{$tipo}'>";
+                            $pelicula_info_html .= "<h2>Sala " . ucfirst(strtolower($tipo)) . "</h2>";
+
+                            if (isset($funciones[$tipo])) {
+                                foreach ($funciones[$tipo] as $num_sala => $horarios) {
+                                    $pelicula_info_html .= "<h5>Sala {$num_sala}</h5><div class='horarios'>";
+                                    foreach ($horarios as $info) {
+                                        $hora = $info['hora'];
+                                        $id_funcion = $info['id_funcion'];
+                                        $pelicula_info_html .= "
+                                            <a href='venta_boletos.php?id_funcion={$id_funcion}&id={$pelicula_buscar}&nombre=" . urlencode($row['NOMBRE']) . "&sala={$num_sala}&hora={$hora}' 
+                                               class='btn btn-outline-primary btn-sm m-1'>
+                                               {$hora}
+                                            </a>";
+                                    }
+                                    $pelicula_info_html .= "</div>";
+                                }
+                            } else {
+                                $pelicula_info_html .= "<p>No hay funciones programadas.</p>";
+                            }
+
+                            $pelicula_info_html .= "</div>";
+                        }
+                        $pelicula_info_html .= "</div>"; // cierre de .salas
+                    } else {
+                        $e = oci_error($stid_funciones);
+                        $pelicula_info_html .= "<p>Error al obtener funciones: " . htmlentities($e['message']) . "</p>";
                     }
-                    $pelicula_info_html .= "</div>"; // cierre de .salas
+
+                    oci_free_statement($stid_funciones);
                 } else {
-                    $e = oci_error($stid_funciones);
-                    $pelicula_info_html .= "<p>Error al obtener funciones: " . htmlentities($e['message']) . "</p>";
+                    $mensaje_error = " 😭 No se encontró la película con ID: " . htmlentities($pelicula_buscar);
                 }
-
-                oci_free_statement($stid_funciones);
             } else {
-                $mensaje_error = " 😭 No se encontró la película con ID: " . htmlentities($pelicula_buscar);
+                $e = oci_error($stid);
+                $mensaje_error = "Error al ejecutar la consulta: " . htmlentities($e['message']);
             }
-        } else {
-            $e = oci_error($stid);
-            $mensaje_error = "Error al ejecutar la consulta: " . htmlentities($e['message']);
-        }
 
-        oci_free_statement($stid);
-        oci_close($conn);
+            oci_free_statement($stid);
+            oci_close($conn);
+        }
+    } elseif (isset($_GET['pelicula_buscar']) && empty(trim($_GET['pelicula_buscar']))) {
+        $mensaje_error = "Por favor, ingresa un ID de película válido.";
+    } else {
+        $mensaje_error = "No se proporcionó ningún ID de película.";
     }
-} elseif ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['pelicula_buscar']) && empty(trim($_GET['pelicula_buscar']))) {
-    $mensaje_error = "Por favor, ingresa un ID de película válido.";
 } else {
     $mensaje_error = "Método de solicitud no válido.";
 }
 ?>
+
 
 <!doctype html>
 <html lang="sp">
