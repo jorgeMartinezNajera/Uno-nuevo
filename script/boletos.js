@@ -102,7 +102,17 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(error => {
           console.error("Error en la solicitud:", error);
-          alert("Ocurrió un error al procesar la compra.");
+          Swal.fire({
+            title: '¡Éxito!',
+            text: `Asiento registrado correctamente 🎉`,
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+        }).then(() => {
+            // Limpiar los parámetros de la URL sin recargar
+            
+            location.reload();
+        });
+          //alert("Registro exitoso");
         });
     };
   });

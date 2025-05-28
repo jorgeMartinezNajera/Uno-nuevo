@@ -68,7 +68,7 @@
             confirmButtonText: 'Aceptar'
         }).then(() => {
             // Limpiar los parámetros de la URL sin recargar
-            window.history.replaceState({}, document.title, window.location.pathname);
+            
             location.reload();
         });
     } else if (registro === 'fallido') {
