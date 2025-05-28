@@ -31,11 +31,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id']) && !empty(trim($_G
                 // Extraer información del cliente
                 $usuario .= '<h1 class="title"> Información del Cliente 👦🏻</h1>';
                 $usuario .= '<ul>';
-                $usuario .= '<li><strong>ID:</strong>' . htmlentities($row['ID_CLIENTE']) . '</li>';
-                $usuario .= '<li><strong>Nombre:</strong>' . htmlentities($row['NOMBRE']) . '</li>';
-                $usuario .= '<li><strong>Teléfono:</strong>' . htmlentities($row['TELEFONO']) . '</li>';
-                $usuario .= '<li><strong>Correo:</strong>' . htmlentities($row['CORREO']) . '</li>';
-                $usuario .= '<li><strong>Metodo de Pago:</strong>' . htmlentities($row['METODO_PAGO']) . '</li>';
+                $usuario .= '<li class="res"><strong>ID:</strong>' . htmlentities($row['ID_CLIENTE']) . '</li>';
+                $usuario .= '<li class="res"><strong>Nombre:</strong>' . htmlentities($row['NOMBRE']) . '</li>';
+                $usuario .= '<li class="res"><strong>Teléfono:</strong>' . htmlentities($row['TELEFONO']) . '</li>';
+                $usuario .= '<li class="res"><strong>Correo:</strong>' . htmlentities($row['CORREO']) . '</li>';
+                $usuario .= '<li class="res"><strong>Metodo de Pago:</strong>' . htmlentities($row['METODO_PAGO']) . '</li>';
                 $usuario .= '</ul>';
             }
             else 
@@ -58,12 +58,12 @@ elseif ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['telefono_buscar']) &
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultado de Búsqueda</title>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Resultados de Busqueda</title>
     <style>
         body {
             font-family: sans-serif;
@@ -72,6 +72,7 @@ elseif ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['telefono_buscar']) &
             display: flex;
             flex-direction: column; /* Para apilar el formulario y los resultados */
             align-items: center;
+            padding-top: 60px; /* Espacio para el navbar fijo */
             justify-content: center;
             min-height: 90vh;
         }
@@ -127,14 +128,14 @@ elseif ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['telefono_buscar']) &
             list-style-type: none;
             padding: 0;
         }
-        li {
+        .res {
             background-color: #e9ecef;
             margin-bottom: 8px;
             padding: 10px;
             border-radius: 4px;
             border-left: 5px solid #007bff;
         }
-        li strong {
+        .res strong {
             color: #0056b3;
         }
         a {
@@ -151,9 +152,63 @@ elseif ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['telefono_buscar']) &
             margin-top: 15px;
         }
     </style>
-</head>
-<body>
-    <div class="container">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+  </head>
+  <body>
+
+        <!-- Navbar -->
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Cinema</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">¿Qué estás buscando?</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index.php">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php">Iniciar Sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php">Ver nuestros horarios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/consultarPelicula.html">Consultar Peliculas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/consultarUsuario.html">Consultar Clientes</a>
+                </li>
+                <!-- <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+                </ul>
+                <form class="d-flex mt-3" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                    <button class="btn btn-success" type="submit">Search</button>
+                </form> -->
+            </div>
+            </div>
+        </div>
+    </nav>
+
+     <div class="container">
         <h2>Buscar Usuario por ID 🔎</h2>
         <form action="buscar_usuario.php" method="GET">
             <div>
@@ -180,6 +235,6 @@ elseif ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['telefono_buscar']) &
         <p style="text-align:center; margin-top:20px;"><a href="../html/consultarUsuario.html">🔍 Realizar otra búsqueda</a></p>
     </div>
     <?php endif; ?>
-
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+  </body>
 </html>
