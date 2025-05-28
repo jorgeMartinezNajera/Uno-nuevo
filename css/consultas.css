@@ -1,0 +1,27 @@
+body {
+    background-color: #F5F5F5 !important;
+    margin: 0;
+    padding: 0;
+    padding-top: 10%;
+    display: flex;
+}
+
+.container {
+    width: 40% !important;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    padding: 4% !important;
+}
+
+.mb-3 {
+    width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: start !important;
+}
+
+.btn {
+    width: 100% !important;
+}
